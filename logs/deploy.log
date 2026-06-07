@@ -1,0 +1,30 @@
+[2026-06-07 12:04:50] Iniciando deploy do Fórum Online...
+[OK] Diretório de destino limpo.
+[OK] Arquivos copiados para /var/www/html
+[OK] index.html encontrado no destino.
+[INFO] Arquivos publicados:
+total 20
+drwxr-xr-x 1 root root 4096 Jun  7 12:04 .
+drwxr-xr-x 1 root root 4096 Jun  7 11:48 ..
+-rwxr-xr-x 1 root root  945 Jun  7 12:04 index.html
+-rwxr-xr-x 1 root root  634 Jun  7 12:04 sobre.html
+[2026-06-07 15:13:43] Iniciando deploy do Fórum Online...
+[OK] Diretório de destino limpo.
+[OK] Arquivos copiados para /var/www/html
+[OK] index.html encontrado no destino.
+[INFO] Arquivos publicados:
+total 20
+drwxr-xr-x 1 root root 4096 Jun  7 15:13 .
+drwxr-xr-x 1 root root 4096 Jun  7 11:48 ..
+-rwxr-xr-x 1 root root  945 Jun  7 15:13 index.html
+-rwxr-xr-x 1 root root  634 Jun  7 15:13 sobre.html
+[2026-06-07 15:14:53] Iniciando deploy do Fórum Online...
+[OK] Diretório de destino limpo.
+[OK] Arquivos copiados para /var/www/html
+[OK] index.html encontrado no destino.
+[INFO] Arquivos publicados:
+total 48
+drwxr-xr-x 1 root root  4096 Jun  7 15:14 .
+drwxr-xr-x 1 root root  4096 Jun  7 11:48 ..
+-rwxr-xr-x 1 root root 26546 Jun  7 15:14 index.html
+-rwxr-xr-x 1 root root  4109 Jun  7 15:14 sobre.html

@@ -1,0 +1,34 @@
+[2026-06-07 12:06:53] Configurando usuários do Fórum Online...
+[OK] Grupo 'forum_ops' criado.
+[OK] Usuário 'moderador_user' criado.
+[OK] Permissões aplicadas em /app/forum/moderacao (750)
+[OK] Permissões aplicadas em /app/forum/topicos (755)
+[INFO] Verificação final:
+total 44
+drwxr-xr-x 10 root           root      4096 Jun  7 12:01 .
+drwxr-xr-x  1 root           root      4096 Jun  7 12:01 ..
+drwxr-xr-x  2 root           root      4096 Jun  7 12:01 anexos
+drwxr-xr-x  2 root           root      4096 Jun  7 12:01 backups
+drwxr-xr-x  2 root           root      4096 Jun  7 12:01 categorias
+drwxr-xr-x  2 root           root      4096 Jun  7 12:01 logs
+drwxr-x---  2 moderador_user forum_ops 4096 Jun  7 12:01 moderacao
+drwxr-xr-x  2 root           root      4096 Jun  7 12:01 publicacao
+drwxr-xr-x  2 root           root      4096 Jun  7 12:01 topicos
+drwxr-xr-x  2 root           root      4096 Jun  7 12:01 usuarios
+[2026-06-07 15:13:58] Configurando usuários do Fórum Online...
+[OK] Grupo 'forum_ops' criado.
+[INFO] Usuário 'moderador_user' já existe.
+[OK] Permissões aplicadas em /app/forum/moderacao (750)
+[OK] Permissões aplicadas em /app/forum/topicos (755)
+[INFO] Verificação final:
+total 44
+drwxr-xr-x 10 root           root      4096 Jun  7 15:13 .
+drwxr-xr-x  1 root           root      4096 Jun  7 15:13 ..
+drwxr-xr-x  2 root           root      4096 Jun  7 15:13 anexos
+drwxr-xr-x  2 root           root      4096 Jun  7 15:13 backups
+drwxr-xr-x  2 root           root      4096 Jun  7 15:13 categorias
+drwxr-xr-x  2 root           root      4096 Jun  7 15:13 logs
+drwxr-x---  2 moderador_user forum_ops 4096 Jun  7 15:13 moderacao
+drwxr-xr-x  2 root           root      4096 Jun  7 15:13 publicacao
+drwxr-xr-x  2 root           root      4096 Jun  7 15:13 topicos
+drwxr-xr-x  2 root           root      4096 Jun  7 15:13 usuarios

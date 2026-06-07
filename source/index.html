@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ForumCloud - Rafael Zink</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.0.0/tabler-icons.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f4f4f8;--surface:#fff;--surface2:#f8f8fc;--border:#e0e0ec;
+  --text:#1a1a2e;--text2:#555570;--text3:#9090a8;
+  --purple:#534AB7;--purple-light:#EEEDFE;--purple-dark:#3C3489;
+  --teal:#0F6E56;--teal-light:#E1F5EE;
+  --coral:#993C1D;--coral-light:#FAECE7;
+  --blue:#185FA5;--blue-light:#E6F1FB;
+  --pink:#993556;--pink-light:#FBEAF0;
+  --amber:#633806;--amber-light:#FAEEDA;
+  --green:#1D9E75;--radius:8px;--radius-lg:12px
+}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.6}
+a{color:var(--purple);text-decoration:none}
+header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;height:56px;position:sticky;top:0;z-index:100;box-shadow:0 1px 4px rgba(0,0,0,0.05)}
+.logo{font-size:18px;font-weight:600;display:flex;align-items:center;gap:8px;color:var(--purple)}
+.logo i{font-size:22px}
+.header-right{display:flex;align-items:center;gap:10px}
+.btn{padding:7px 16px;border-radius:var(--radius);border:1px solid var(--border);background:var(--surface);color:var(--text);cursor:pointer;font-size:13px;font-weight:500;display:inline-flex;align-items:center;gap:6px;transition:all 0.15s}
+.btn:hover{background:var(--surface2);border-color:var(--purple)}
+.btn-primary{background:var(--purple);color:#fff;border-color:var(--purple)}
+.btn-primary:hover{background:var(--purple-dark)}
+.avatar{border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;flex-shrink:0;cursor:pointer;width:36px;height:36px}
+.av-purple{background:var(--purple-light);color:var(--purple-dark)}
+.av-teal{background:var(--teal-light);color:var(--teal)}
+.av-coral{background:var(--coral-light);color:var(--coral)}
+.av-blue{background:var(--blue-light);color:var(--blue)}
+.av-pink{background:var(--pink-light);color:var(--pink)}
+.layout{display:grid;grid-template-columns:1fr 280px;gap:1rem;max-width:1140px;margin:1.5rem auto;padding:0 1rem}
+@media(max-width:768px){.layout{grid-template-columns:1fr}.sidebar{display:none}}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);margin-bottom:1rem;overflow:hidden}
+.card-header{padding:.875rem 1.25rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.card-header h2{font-size:12px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:0.06em}
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;padding:1rem}
+.cat-item{border:1px solid var(--border);border-radius:var(--radius);padding:12px;cursor:pointer;transition:all 0.15s}
+.cat-item:hover{border-color:var(--purple);background:var(--surface2)}
+.cat-item.active{border-color:var(--purple);background:var(--purple-light)}
+.cat-icon{font-size:22px;color:var(--purple);margin-bottom:6px}
+.cat-name{font-size:13px;font-weight:600;color:var(--text)}
+.cat-count{font-size:11px;color:var(--text3);margin-top:2px}
+.toolbar{display:flex;align-items:center;gap:10px;padding:1rem;border-bottom:1px solid var(--border)}
+.search-wrap{display:flex;align-items:center;gap:8px;flex:1;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:0 12px}
+.search-wrap i{color:var(--text3);font-size:16px}
+.search-wrap input{flex:1;border:none;background:transparent;padding:8px 0;font-size:14px;color:var(--text);outline:none}
+.sort-sel{padding:8px 12px;border:1px solid var(--border);border-radius:var(--radius);font-size:13px;color:var(--text);background:var(--surface);cursor:pointer}
+.topic-item{padding:1rem 1.25rem;border-bottom:1px solid var(--border);display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:start;cursor:pointer;transition:background 0.12s}
+.topic-item:last-child{border-bottom:none}
+.topic-item:hover{background:var(--surface2)}
+.topic-item.pinned{background:#fffbf2}
+.topic-title{font-size:15px;font-weight:600;margin-bottom:5px;line-height:1.4;color:var(--text)}
+.topic-meta{font-size:12px;color:var(--text3);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.badge{display:inline-flex;align-items:center;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:600}
+.badge-purple{background:var(--purple-light);color:var(--purple-dark)}
+.badge-teal{background:var(--teal-light);color:var(--teal)}
+.badge-coral{background:var(--coral-light);color:var(--coral)}
+.badge-blue{background:var(--blue-light);color:var(--blue)}
+.tag-inline{color:var(--purple);font-size:12px}
+.topic-stats{display:flex;flex-direction:column;align-items:flex-end;gap:6px;font-size:12px;color:var(--text3);min-width:72px;text-align:right}
+.stat-big{font-size:16px;font-weight:700;color:var(--text);display:block}
+.sidebar .card-header{padding:.75rem 1rem}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:1rem}
+.stat-box{background:var(--surface2);border-radius:var(--radius);padding:10px;text-align:center;border:1px solid var(--border)}
+.stat-box .n{font-size:22px;font-weight:700;color:var(--purple)}
+.stat-box .l{font-size:11px;color:var(--text3);margin-top:2px}
+.au-list{padding:1rem}
+.au-item{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.au-item:last-child{margin:0}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--green);margin-left:-6px;margin-top:20px;border:2px solid var(--surface)}
+.au-name{font-size:13px;font-weight:600;flex:1}
+.au-posts{font-size:12px;color:var(--text3)}
+.tags-list{padding:1rem;display:flex;flex-wrap:wrap;gap:6px}
+.tag-pill{padding:4px 12px;border-radius:20px;border:1px solid var(--border);font-size:12px;cursor:pointer;color:var(--text2);transition:all 0.12s}
+.tag-pill:hover{border-color:var(--purple);color:var(--purple);background:var(--purple-light)}
+.modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:200;display:none;align-items:center;justify-content:center}
+.modal-backdrop.open{display:flex}
+.modal{background:var(--surface);border-radius:var(--radius-lg);border:1px solid var(--border);width:92%;max-width:560px;padding:1.5rem;box-shadow:0 8px 32px rgba(0,0,0,0.12)}
+.modal h3{font-size:17px;font-weight:600;margin-bottom:1.25rem;display:flex;align-items:center;gap:8px}
+.form-group{margin-bottom:1rem}
+.form-group label{font-size:13px;color:var(--text2);display:block;margin-bottom:5px;font-weight:500}
+.form-group input,.form-group textarea,.form-group select{width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:var(--radius);font-size:14px;color:var(--text);background:var(--surface);font-family:inherit;outline:none;transition:border 0.15s}
+.form-group input:focus,.form-group textarea:focus{border-color:var(--purple)}
+.form-group textarea{min-height:130px;resize:vertical}
+.modal-footer{display:flex;justify-content:flex-end;gap:8px;margin-top:1.25rem}
+.detail-view{display:none}
+.detail-view.open{display:block}
+.list-view.hidden{display:none}
+.back-btn{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--text2);cursor:pointer;margin-bottom:1rem;background:none;border:none;padding:0;font-weight:500}
+.back-btn:hover{color:var(--purple)}
+.topic-detail-header{padding:1.25rem;border-bottom:1px solid var(--border)}
+.topic-detail-header h2{font-size:19px;font-weight:700;line-height:1.4;margin:8px 0}
+.op-post{display:grid;grid-template-columns:auto 1fr;gap:14px;padding:1.25rem;border-bottom:1px solid var(--border)}
+.post-author{font-weight:600;font-size:14px;margin-bottom:4px;display:flex;align-items:center;gap:8px}
+.post-author .role{font-size:11px;padding:2px 8px;border-radius:20px;background:var(--purple-light);color:var(--purple-dark);font-weight:600}
+.post-body{font-size:14px;line-height:1.75;color:var(--text);margin-top:4px}
+.post-actions{display:flex;gap:14px;margin-top:12px}
+.act-btn{background:none;border:none;font-size:12px;color:var(--text3);cursor:pointer;display:flex;align-items:center;gap:5px;padding:0;font-family:inherit;transition:color 0.12s}
+.act-btn:hover{color:var(--purple)}
+.act-btn.liked{color:#D4537E}
+.replies-section{}
+.reply-item{display:grid;grid-template-columns:auto 1fr;gap:14px;padding:1rem 1.25rem;border-bottom:1px solid var(--border)}
+.reply-item:last-child{border-bottom:none}
+.reply-box{padding:1rem 1.25rem;border-top:1px solid var(--border);display:flex;gap:12px;align-items:flex-start;background:var(--surface2)}
+.reply-textarea{flex:1;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius);font-size:14px;color:var(--text);background:var(--surface);font-family:inherit;resize:vertical;min-height:64px;outline:none}
+.reply-textarea:focus{border-color:var(--purple)}
+.empty-state{padding:2.5rem;text-align:center;color:var(--text3)}
+.empty-state i{font-size:36px;display:block;margin-bottom:8px}
+.toast{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--purple);color:#fff;padding:10px 20px;border-radius:var(--radius);font-size:13px;z-index:999;opacity:0;transition:opacity 0.2s;pointer-events:none}
+.toast.show{opacity:1}
+.pin-icon{color:#BA7517;font-size:13px;vertical-align:middle;margin-right:3px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo"><i class="ti ti-message-circle-2"></i> ForumCloud</div>
+  <div class="header-right">
+    <button class="btn btn-primary" onclick="openModal()"><i class="ti ti-plus"></i> Novo tópico</button>
+    <div class="avatar av-purple" title="Rafael Zink">RZ</div>
+  </div>
+</header>
+
+<div class="layout">
+  <div class="main">
+    <!-- LISTA -->
+    <div class="list-view" id="listView">
+      <div class="card">
+        <div class="card-header"><h2>Categorias</h2></div>
+        <div class="cat-grid" id="catGrid"></div>
+      </div>
+      <div class="card">
+        <div class="toolbar">
+          <div class="search-wrap">
+            <i class="ti ti-search"></i>
+            <input type="text" id="searchInput" placeholder="Buscar tópicos, tags..." oninput="renderTopics()">
+          </div>
+          <select class="sort-sel" onchange="renderTopics()" id="sortSel">
+            <option value="recent">Mais recentes</option>
+            <option value="popular">Mais curtidos</option>
+            <option value="replies">Mais respondidos</option>
+          </select>
+        </div>
+        <div id="topicList"></div>
+      </div>
+    </div>
+
+    <!-- DETALHE -->
+    <div class="detail-view" id="detailView">
+      <button class="back-btn" onclick="closeDetail()"><i class="ti ti-arrow-left"></i> Voltar para tópicos</button>
+      <div class="card" id="detailCard"></div>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="card">
+      <div class="card-header"><h2>Estatísticas do fórum</h2></div>
+      <div class="stat-grid" id="sideStats"></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><h2>Usuários online</h2></div>
+      <div class="au-list" id="activeUsers"></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><h2>Tags populares</h2></div>
+      <div class="tags-list" id="tagsWrap"></div>
+    </div>
+  </aside>
+</div>
+
+<!-- MODAL NOVO TÓPICO -->
+<div class="modal-backdrop" id="modalBackdrop" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <h3><i class="ti ti-edit"></i> Criar novo tópico</h3>
+    <div class="form-group">
+      <label>Título</label>
+      <input type="text" id="newTitle" placeholder="Descreva sua dúvida ou ideia...">
+    </div>
+    <div class="form-group">
+      <label>Categoria</label>
+      <select id="newCat">
+        <option>Geral</option>
+        <option>Suporte Técnico</option>
+        <option>Desenvolvimento</option>
+        <option>Segurança</option>
+        <option>Novidades</option>
+        <option>Dicas e Tutoriais</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Mensagem</label>
+      <textarea id="newBody" placeholder="Explique com detalhes..."></textarea>
+    </div>
+    <div class="form-group">
+      <label>Tags (separadas por vírgula)</label>
+      <input type="text" id="newTags" placeholder="ex: docker, linux, apache">
+    </div>
+    <div class="modal-footer">
+      <button class="btn" onclick="closeModal()">Cancelar</button>
+      <button class="btn btn-primary" onclick="submitTopic()">Publicar</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const CATS=[
+  {name:"Todos",icon:"ti-layout-grid"},
+  {name:"Geral",icon:"ti-message-2"},
+  {name:"Suporte Técnico",icon:"ti-headset"},
+  {name:"Desenvolvimento",icon:"ti-code"},
+  {name:"Segurança",icon:"ti-shield"},
+  {name:"Novidades",icon:"ti-bell"},
+  {name:"Dicas e Tutoriais",icon:"ti-book"}
+];
+const BADGE={Geral:"badge-purple","Suporte Técnico":"badge-teal",Desenvolvimento:"badge-blue",Segurança:"badge-coral",Novidades:"badge-purple","Dicas e Tutoriais":"badge-teal"};
+
+let topics=[
+  {id:1,title:"Como configurar Docker com volume persistente no Ubuntu?",cat:"Suporte Técnico",author:"Rafael Z.",av:"av-purple",init:"RZ",role:"Moderador",body:"Estou tentando configurar um ambiente com Docker e volume persistente, mas os dados não estão sendo mantidos após reiniciar o container. Alguém pode me ajudar a entender como mapear os volumes corretamente?",time:"há 2h",views:342,likes:24,liked:false,pinned:true,tags:["docker","ubuntu","devops"],replies:[{author:"Maria A.",init:"MA",av:"av-teal",role:"Membro",body:"Você precisa mapear o volume no docker-compose.yml usando a sintaxe <code>volumes: - ./dados:/app/dados</code>. Desta forma os dados ficam salvos na pasta local mesmo após o container ser reiniciado.",time:"há 1h",likes:12,liked:false},{author:"João P.",init:"JP",av:"av-coral",role:"Membro",body:"Complementando: verifique se o caminho do volume está correto e se o usuário dentro do container tem permissão de escrita no diretório de destino.",time:"há 45min",likes:7,liked:false}]},
+  {id:2,title:"Melhores práticas para permissões Linux em produção",cat:"Segurança",author:"Carlos F.",av:"av-blue",init:"CF",role:"Admin",body:"Quais são as melhores práticas para configurar permissões de arquivos e diretórios em servidores Linux de produção? Especialmente para aplicações web rodando com Apache.",time:"há 4h",views:215,likes:31,liked:false,pinned:false,tags:["linux","segurança","chmod"],replies:[{author:"Luana S.",init:"LS",av:"av-purple",role:"Moderador",body:"Nunca use <code>chmod 777</code> em produção! Use 750 para diretórios sensíveis e 640 para arquivos de configuração. Sempre crie usuários de serviço sem privilégios de login interativo.",time:"há 3h",likes:18,liked:false}]},
+  {id:3,title:"Apache vs Nginx: qual escolher para hospedar um fórum em 2026?",cat:"Desenvolvimento",author:"Bruno T.",av:"av-teal",init:"BT",role:"Membro",body:"Estou montando a infraestrutura de um fórum e fiquei em dúvida entre Apache e Nginx. Qual vocês recomendam considerando facilidade de configuração e performance com muitos usuários simultâneos?",time:"há 6h",views:189,likes:15,liked:false,pinned:false,tags:["apache","nginx","cloud"],replies:[]},
+  {id:4,title:"Shell Script: como validar se o Apache está rodando e reiniciar automaticamente?",cat:"Dicas e Tutoriais",author:"Karla M.",av:"av-pink",init:"KM",role:"Membro",body:"Preciso de um script que verifique se o Apache está ativo e reinicie automaticamente caso esteja parado. Como fazer isso de forma segura e agendar com cron?",time:"há 8h",views:401,likes:45,liked:false,pinned:false,tags:["shell","bash","apache"],replies:[{author:"Rafael Z.",init:"RZ",av:"av-purple",role:"Moderador",body:"Use: <code>service apache2 status > /dev/null 2>&1 || service apache2 start</code>. Para agendar, adicione ao crontab: <code>*/5 * * * * /usr/local/bin/check_apache.sh</code>",time:"há 7h",likes:22,liked:false}]},
+  {id:5,title:"Como gerar backup automatizado com tar.gz e data no nome?",cat:"Dicas e Tutoriais",author:"Diego P.",av:"av-coral",init:"DP",role:"Membro",body:"Alguém tem um exemplo de script de backup que gere arquivos .tar.gz com a data e hora no nome? Preciso versionar os backups diariamente de forma automática.",time:"há 1d",views:287,likes:38,liked:false,pinned:false,tags:["backup","shell","linux"],replies:[{author:"Karla M.",init:"KM",av:"av-pink",role:"Membro",body:"Use: <code>DATA=$(date '+%Y-%m-%d_%H-%M'); tar -czf backup_${DATA}.tar.gz /app/dados/</code>. Funciona perfeitamente e você pode combinar com o cron para executar todo dia à meia-noite.",time:"há 23h",likes:33,liked:false}]},
+  {id:6,title:"Novidades do Ubuntu 24 LTS para servidores cloud — vale migrar?",cat:"Novidades",author:"Maria A.",av:"av-teal",init:"MA",role:"Admin",body:"Quem já testou o Ubuntu 24 LTS em ambiente de cloud? Quais as principais melhorias em relação ao 22 LTS para uso em servidores? Vale a pena migrar agora ou esperar?",time:"há 2d",views:156,likes:9,liked:false,pinned:false,tags:["ubuntu","cloud","linux"],replies:[]}
+];
+
+let currentCat="Todos";
+let currentTopic=null;
+
+function renderCats(){
+  document.getElementById("catGrid").innerHTML=CATS.map(c=>{
+    const count=c.name==="Todos"?topics.length:topics.filter(t=>t.cat===c.name).length;
+    return `<div class="cat-item ${currentCat===c.name?'active':''}" onclick="filterCat('${c.name}')">
+      <div class="cat-icon"><i class="ti ${c.icon}"></i></div>
+      <div class="cat-name">${c.name}</div>
+      <div class="cat-count">${count} tópico${count!==1?'s':''}</div>
+    </div>`;
+  }).join('');
+}
+
+function filterCat(name){currentCat=name;renderCats();renderTopics()}
+
+function renderTopics(){
+  const q=document.getElementById("searchInput").value.toLowerCase();
+  const sort=document.getElementById("sortSel").value;
+  let list=[...topics];
+  if(currentCat!=="Todos") list=list.filter(t=>t.cat===currentCat);
+  if(q) list=list.filter(t=>t.title.toLowerCase().includes(q)||t.tags.some(g=>g.includes(q))||t.body.toLowerCase().includes(q));
+  if(sort==="popular") list.sort((a,b)=>b.likes-a.likes);
+  else if(sort==="replies") list.sort((a,b)=>b.replies.length-a.replies.length);
+  else list.sort((a,b)=>b.id-a.id);
+  list.sort((a,b)=>b.pinned-a.pinned);
+  const el=document.getElementById("topicList");
+  if(!list.length){
+    el.innerHTML=`<div class="empty-state"><i class="ti ti-message-off"></i>Nenhum tópico encontrado</div>`;
+    return;
+  }
+  el.innerHTML=list.map(t=>`
+    <div class="topic-item ${t.pinned?'pinned':''}" onclick="openDetail(${t.id})">
+      <div class="avatar ${t.av}">${t.init}</div>
+      <div>
+        <div class="topic-title">${t.pinned?'<i class="ti ti-pin pin-icon"></i>':''} ${t.title}</div>
+        <div class="topic-meta">
+          <span class="badge ${BADGE[t.cat]||'badge-purple'}">${t.cat}</span>
+          <span><i class="ti ti-user" style="font-size:12px"></i> ${t.author}</span>
+          <span><i class="ti ti-clock" style="font-size:12px"></i> ${t.time}</span>
+          ${t.tags.map(g=>`<span class="tag-inline">#${g}</span>`).join('')}
+        </div>
+      </div>
+      <div class="topic-stats">
+        <div><span class="stat-big">${t.replies.length}</span>respostas</div>
+        <div>${t.views} views</div>
+        <div><i class="ti ti-heart" style="color:#D4537E;font-size:12px"></i> ${t.likes}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function openDetail(id){
+  currentTopic=topics.find(t=>t.id===id);
+  currentTopic.views++;
+  renderDetail();
+  document.getElementById("listView").classList.add("hidden");
+  document.getElementById("detailView").classList.add("open");
+  window.scrollTo(0,0);
+}
+function closeDetail(){
+  document.getElementById("listView").classList.remove("hidden");
+  document.getElementById("detailView").classList.remove("open");
+  renderTopics();
+}
+
+function renderDetail(){
+  const t=currentTopic;
+  document.getElementById("detailCard").innerHTML=`
+    <div class="topic-detail-header">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+        <span class="badge ${BADGE[t.cat]||'badge-purple'}">${t.cat}</span>
+        ${t.tags.map(g=>`<span class="tag-inline">#${g}</span>`).join('')}
+      </div>
+      <h2>${t.title}</h2>
+      <div style="font-size:12px;color:var(--text3);margin-top:8px;display:flex;gap:14px">
+        <span><i class="ti ti-eye"></i> ${t.views} views</span>
+        <span><i class="ti ti-message"></i> ${t.replies.length} respostas</span>
+        <span><i class="ti ti-clock"></i> ${t.time}</span>
+      </div>
+    </div>
+    <div class="op-post">
+      <div class="avatar ${t.av}" style="width:42px;height:42px;font-size:15px">${t.init}</div>
+      <div>
+        <div class="post-author">${t.author} <span class="role">${t.role}</span></div>
+        <div class="post-body">${t.body}</div>
+        <div class="post-actions">
+          <button class="act-btn liked ${t.liked?'liked':''}" onclick="likeTopic()">
+            <i class="ti ti-heart"></i> <span id="topicLikes">${t.likes}</span> curtidas
+          </button>
+          <button class="act-btn"><i class="ti ti-share"></i> Compartilhar</button>
+          <button class="act-btn"><i class="ti ti-bookmark"></i> Salvar</button>
+        </div>
+      </div>
+    </div>
+    <div id="repliesArea">
+      ${renderRepliesHTML(t)}
+    </div>
+    <div class="reply-box">
+      <div class="avatar av-purple" style="width:38px;height:38px;font-size:13px">RZ</div>
+      <textarea class="reply-textarea" id="replyInput" placeholder="Escreva sua resposta..." rows="3"></textarea>
+      <button class="btn btn-primary" onclick="submitReply()" style="align-self:flex-end">
+        <i class="ti ti-send"></i> Enviar
+      </button>
+    </div>
+  `;
+}
+
+function renderRepliesHTML(t){
+  if(!t.replies.length) return `<div class="empty-state" style="padding:1.5rem"><i class="ti ti-message-plus"></i>Seja o primeiro a responder!</div>`;
+  return t.replies.map((r,i)=>`
+    <div class="reply-item">
+      <div class="avatar ${r.av}" style="width:38px;height:38px;font-size:13px">${r.init}</div>
+      <div>
+        <div class="post-author" style="font-size:13px">${r.author} <span class="role">${r.role}</span> <span style="font-weight:400;font-size:11px;color:var(--text3)">${r.time}</span></div>
+        <div class="post-body">${r.body}</div>
+        <div class="post-actions">
+          <button class="act-btn ${r.liked?'liked':''}" onclick="likeReply(${i})">
+            <i class="ti ti-thumb-up"></i> ${r.likes}
+          </button>
+          <button class="act-btn"><i class="ti ti-arrow-back-up"></i> Responder</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function likeTopic(){
+  const t=currentTopic;
+  t.liked=!t.liked;
+  t.likes+=t.liked?1:-1;
+  renderDetail();
+}
+function likeReply(i){
+  const r=currentTopic.replies[i];
+  r.liked=!r.liked;
+  r.likes+=r.liked?1:-1;
+  document.getElementById("repliesArea").innerHTML=renderRepliesHTML(currentTopic);
+}
+
+function submitReply(){
+  const txt=document.getElementById("replyInput").value.trim();
+  if(!txt){showToast("Escreva algo antes de enviar!");return}
+  currentTopic.replies.push({author:"Rafael Z.",init:"RZ",av:"av-purple",role:"Moderador",body:txt,time:"agora",likes:0,liked:false});
+  renderDetail();
+  showToast("Resposta publicada com sucesso!");
+}
+
+function openModal(){document.getElementById("modalBackdrop").classList.add("open")}
+function closeModal(){document.getElementById("modalBackdrop").classList.remove("open")}
+
+function submitTopic(){
+  const title=document.getElementById("newTitle").value.trim();
+  const cat=document.getElementById("newCat").value;
+  const body=document.getElementById("newBody").value.trim();
+  const tagsRaw=document.getElementById("newTags").value;
+  if(!title||!body){showToast("Preencha o título e a mensagem!");return}
+  const tags=tagsRaw?tagsRaw.split(",").map(t=>t.trim().toLowerCase()).filter(Boolean):[cat.toLowerCase().replace(/ /g,'-')];
+  topics.unshift({id:Date.now(),title,cat,author:"Rafael Z.",av:"av-purple",init:"RZ",role:"Moderador",body,time:"agora",views:1,likes:0,liked:false,pinned:false,tags,replies:[]});
+  closeModal();
+  document.getElementById("newTitle").value="";
+  document.getElementById("newBody").value="";
+  document.getElementById("newTags").value="";
+  renderCats();renderTopics();renderSidebar();
+  showToast("Tópico publicado!");
+}
+
+function renderSidebar(){
+  document.getElementById("sideStats").innerHTML=`
+    <div class="stat-box"><div class="n">${topics.length}</div><div class="l">tópicos</div></div>
+    <div class="stat-box"><div class="n">${topics.reduce((a,t)=>a+t.replies.length,0)}</div><div class="l">respostas</div></div>
+    <div class="stat-box"><div class="n">8</div><div class="l">membros</div></div>
+    <div class="stat-box"><div class="n">3</div><div class="l">online</div></div>
+  `;
+  const users=[{n:"Rafael Z.",p:45,av:"av-purple",i:"RZ"},{n:"Maria A.",p:38,av:"av-teal",i:"MA"},{n:"Karla M.",p:31,av:"av-pink",i:"KM"}];
+  document.getElementById("activeUsers").innerHTML=users.map(u=>`
+    <div class="au-item">
+      <div class="avatar ${u.av}" style="width:32px;height:32px;font-size:11px;position:relative">${u.i}</div>
+      <span class="dot"></span>
+      <span class="au-name">${u.n}</span>
+      <span class="au-posts">${u.p} posts</span>
+    </div>
+  `).join('');
+  const tags=["docker","linux","apache","shell","backup","nginx","segurança","devops","cloud","ubuntu","bash","chmod"];
+  document.getElementById("tagsWrap").innerHTML=tags.map(t=>`
+    <span class="tag-pill" onclick="document.getElementById('searchInput').value='${t}';filterCat('Todos')">#${t}</span>
+  `).join('');
+}
+
+function showToast(msg){
+  const el=document.getElementById("toast");
+  el.textContent=msg;el.classList.add("show");
+  setTimeout(()=>el.classList.remove("show"),2800);
+}
+
+renderCats();renderTopics();renderSidebar();
+</script>
+</body>
+</html>

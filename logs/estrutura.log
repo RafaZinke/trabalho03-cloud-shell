@@ -1,0 +1,26 @@
+[2026-06-07 12:01:47] Criando estrutura do Fórum Online...
+[OK] Estrutura criada com sucesso:
+total 44
+drwxr-xr-x 10 root root 4096 Jun  7 12:01 .
+drwxr-xr-x  1 root root 4096 Jun  7 12:01 ..
+drwxr-xr-x  2 root root 4096 Jun  7 12:01 anexos
+drwxr-xr-x  2 root root 4096 Jun  7 12:01 backups
+drwxr-xr-x  2 root root 4096 Jun  7 12:01 categorias
+drwxr-xr-x  2 root root 4096 Jun  7 12:01 logs
+drwxr-xr-x  2 root root 4096 Jun  7 12:01 moderacao
+drwxr-xr-x  2 root root 4096 Jun  7 12:01 publicacao
+drwxr-xr-x  2 root root 4096 Jun  7 12:01 topicos
+drwxr-xr-x  2 root root 4096 Jun  7 12:01 usuarios
+[2026-06-07 15:13:36] Criando estrutura do Fórum Online...
+[OK] Estrutura criada com sucesso:
+total 44
+drwxr-xr-x 10 root root 4096 Jun  7 15:13 .
+drwxr-xr-x  1 root root 4096 Jun  7 15:13 ..
+drwxr-xr-x  2 root root 4096 Jun  7 15:13 anexos
+drwxr-xr-x  2 root root 4096 Jun  7 15:13 backups
+drwxr-xr-x  2 root root 4096 Jun  7 15:13 categorias
+drwxr-xr-x  2 root root 4096 Jun  7 15:13 logs
+drwxr-xr-x  2 root root 4096 Jun  7 15:13 moderacao
+drwxr-xr-x  2 root root 4096 Jun  7 15:13 publicacao
+drwxr-xr-x  2 root root 4096 Jun  7 15:13 topicos
+drwxr-xr-x  2 root root 4096 Jun  7 15:13 usuarios

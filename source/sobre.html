@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sobre - ForumCloud</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.0.0/tabler-icons.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#f4f4f8;color:#1a1a2e;font-size:15px;line-height:1.7}
+header{background:#fff;border-bottom:1px solid #e0e0ec;padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;height:56px;position:sticky;top:0;z-index:100}
+.logo{font-size:18px;font-weight:600;display:flex;align-items:center;gap:8px;color:#534AB7}
+.logo i{font-size:22px}
+.container{max-width:720px;margin:2rem auto;padding:0 1rem}
+.card{background:#fff;border:1px solid #e0e0ec;border-radius:12px;padding:2rem;margin-bottom:1.5rem}
+h1{font-size:24px;font-weight:700;margin-bottom:1rem;color:#534AB7}
+h2{font-size:17px;font-weight:600;margin:1.5rem 0 .75rem;color:#1a1a2e}
+p{color:#444;margin-bottom:1rem}
+.tech-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-top:1rem}
+.tech-item{background:#EEEDFE;border-radius:8px;padding:12px;text-align:center;font-size:13px;font-weight:600;color:#3C3489}
+.tech-item i{font-size:22px;display:block;margin-bottom:4px}
+.back-link{display:inline-flex;align-items:center;gap:6px;color:#534AB7;font-weight:500;font-size:14px;text-decoration:none;margin-bottom:1.5rem}
+.back-link:hover{text-decoration:underline}
+.info-row{display:flex;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid #e0e0ec;font-size:14px}
+.info-row:last-child{border:none}
+.info-label{color:#777;min-width:140px;font-weight:500}
+.info-val{color:#1a1a2e;font-weight:600}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo"><i class="ti ti-message-circle-2"></i> ForumCloud</div>
+  <nav><a href="index.html" style="font-size:13px;color:#534AB7;font-weight:500"><i class="ti ti-arrow-left"></i> Voltar ao fórum</a></nav>
+</header>
+<div class="container">
+  <a href="index.html" class="back-link"><i class="ti ti-arrow-left"></i> Voltar ao fórum</a>
+  <div class="card">
+    <h1><i class="ti ti-info-circle"></i> Sobre o projeto</h1>
+    <p>O <strong>ForumCloud</strong> é uma aplicação de fórum online desenvolvida como parte do Trabalho 03 da disciplina de Cloud Computing da Unidavi, simulando a infraestrutura cloud de uma plataforma de discussão colaborativa.</p>
+    <p>O ambiente é executado em um container Docker com Ubuntu Server e Apache, com deploy automatizado via Shell Script, seguindo práticas reais de DevOps e administração de sistemas Linux.</p>
+    <div class="info-row"><span class="info-label">Aluno</span><span class="info-val">Rafael Zink</span></div>
+    <div class="info-row"><span class="info-label">Curso</span><span class="info-val">Sistemas de Informação — 7ª Fase</span></div>
+    <div class="info-row"><span class="info-label">Instituição</span><span class="info-val">Unidavi</span></div>
+    <div class="info-row"><span class="info-label">Disciplina</span><span class="info-val">Cloud Computing</span></div>
+    <div class="info-row"><span class="info-label">Professor</span><span class="info-val">Prof. Esp. Ademar Perfoll Junior</span></div>
+    <div class="info-row"><span class="info-label">Tema</span><span class="info-val">Infraestrutura para Fórum Online</span></div>
+  </div>
+  <div class="card">
+    <h2>Tecnologias utilizadas</h2>
+    <div class="tech-grid">
+      <div class="tech-item"><i class="ti ti-brand-docker"></i>Docker</div>
+      <div class="tech-item"><i class="ti ti-brand-ubuntu"></i>Ubuntu 22</div>
+      <div class="tech-item"><i class="ti ti-server"></i>Apache</div>
+      <div class="tech-item"><i class="ti ti-terminal-2"></i>Shell Script</div>
+      <div class="tech-item"><i class="ti ti-brand-github"></i>GitHub</div>
+      <div class="tech-item"><i class="ti ti-cloud"></i>DockerHub</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
